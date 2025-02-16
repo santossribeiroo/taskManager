@@ -51,8 +51,10 @@ php artisan serve
 ## Informações para teste
 
 Credenciais para teste:
+```
 e-mail: lucas@exemplo.com
 senha: secret
+```
 
 ## Rotas
 
