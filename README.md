@@ -1,4 +1,4 @@
-# Gerenciado de tarefas
+# Gerenciador de tarefas
 
 ### Pré-requisitos
 
