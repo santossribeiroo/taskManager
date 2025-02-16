@@ -1,0 +1,16 @@
+.btn-primary {
+    --bs-btn-color: var(--bs-card-title-color);
+    --bs-btn-bg: #38d39f;
+    --bs-btn-border-color: #38d39f;
+    --bs-btn-hover-color: var(--bs-card-title-color);
+    --bs-btn-hover-bg: #32bd8f;
+    --bs-btn-hover-border-color: #2ca87f;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: var(--bs-card-title-color);
+    --bs-btn-active-bg: #2ca87f;
+    --bs-btn-active-border-color: #27936f;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: var(--bs-card-title-color);
+    --bs-btn-disabled-bg: #38d39f;
+    --bs-btn-disabled-border-color: #38d39f;
+}
