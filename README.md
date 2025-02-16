@@ -55,20 +55,30 @@ e-mail: lucas@exemplo.com
 senha: secret
 
 ## Rotas
+
+### Usuários
+```
 GET - http://localhost:8000/api/users - Listar usuários e registros
 GET - http://localhost:8000/api/users/1 - Listar os registros de um usuário
 POST - http://localhost:8000/api/register - Cadastrar um usuário
 PUT - http://localhost:8000/api/users/1 - Atualizar um usuário
 DELETE - http://localhost:8000/api/users/1 - Deletar um usuário
+```
 
+### Projetos
+```
 GET - http://localhost:8000/api/projects - Listar projetos e registros
 GET - http://localhost:8000/api/projects/1 - Listar os registros de um projeto
 POST - http://localhost:8000/api/registerProject - Cadastrar um projeto
 PUT - http://localhost:8000/api/projects/1 - Atualizar um projeto
 DELETE - http://localhost:8000/api/projects/1 - Deletar um projeto
+```
 
+### Tarefas
+```
 GET - http://localhost:8000/api/tasks - Listar tarefas e registros
 GET - http://localhost:8000/api/tasks/1 - Listar os registros de um tarefa
 POST - http://localhost:8000/api/registerTask - Cadastrar um tarefa
 PUT - http://localhost:8000/api/tasks/1 - Atualizar um tarefa
 DELETE - http://localhost:8000/api/tasks/1 - Deletar um tarefa
+```
