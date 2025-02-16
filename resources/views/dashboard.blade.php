@@ -1,9 +1,16 @@
 @extends('layouts.app')
 @section('title')
-    Painel
+Painel
 @endsection
 @section('content')
+
+
 <div class="container">
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
     <h2>Bem vindo ao painel de controle</h2>
     <p>Aqui você pode gerenciar suas tarefas, rotinas, anotações e arquivos</p>
 
@@ -28,7 +35,10 @@
                         @foreach($recentTasks as $task)
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             {{ $task->title }}
-                            <span class="badge bg-primary rounded-pill">{{ $task->status == 'to_do' ? 'A fazer' : 'Em progresso' }}</span>
+                            <span class="badge bg-primary rounded-pill">
+                                {{ $task->status == 'to_do' ? 'A fazer' : 
+                                ($task->status == 'in_progress' ? 'Em progresso' :
+                                ($task->status == 'completed' ? 'Completa' : '')) }}</span>
                         </li>
                         @endforeach
                     </ul>
