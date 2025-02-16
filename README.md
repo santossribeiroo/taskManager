@@ -48,6 +48,11 @@ php artisan migrate --seed
 php artisan serve
 ```
 
+## Acessar o login
+```
+http://localhost:8000/login
+```
+
 ## Informações para teste
 
 Credenciais para teste:
