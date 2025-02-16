@@ -17,4 +17,28 @@ class Task extends Model
         'priority',
         'status',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function Project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function getStatusColorAttribute()
+    {
+        switch ($this->status) {
+            case 'to_do':
+                return 'primary';
+            case 'in_progress':
+                return 'warning';
+            case 'completed':
+                return 'sucess';
+            default:
+                return 'secondary';
+        }
+    }
 }

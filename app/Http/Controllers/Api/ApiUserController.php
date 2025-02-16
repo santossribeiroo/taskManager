@@ -9,7 +9,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
-class UserController extends Controller
+class ApiUserController extends Controller
 {
     /**
      * Retorna lista de usuários

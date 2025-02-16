@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\TaskRequest;
-use App\Models\Task;
+use App\Http\Requests\projectRequest;
+use App\Models\Project;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
-class TaskController extends Controller
+class ApiProjectController extends Controller
 {
     /**
      * Retorna lista de Projetos
@@ -22,12 +22,12 @@ class TaskController extends Controller
     {
 
         // Recupera os Projetos do banco e ordena pelo ID
-        $tasks = Task::orderBy('id')->get();
+        $projects = Project::orderBy('id')->get();
 
         // Retorna os Projetos recuperados como uma resposta JSON
         return response()->json([
             'status' => true,
-            'tasks' => $tasks,
+            'projects' => $projects,
         ], 200);
     }
 
@@ -36,26 +36,26 @@ class TaskController extends Controller
      * 
      * Retorna os detalhes em formato JSON
      * 
-     * @param \App\Models\Task
+     * @param \App\Models\Project
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Task $task): JsonResponse
+    public function show(Project $project): JsonResponse
     {
 
         // Retorna os detalhes do Projeto em formato JSON
         return response()->json([
             'status' => true,
-            'task' => $task,
+            'project' => $project,
         ], 200);
     }
 
     /**
      * Cria novo Projeto com dados da requisição
      * 
-     * @param \App\Http\Requests\TaskRequest $request contém os dados do Projeto a ser criado
+     * @param \App\Http\Requests\ProjectRequest $request contém os dados do Projeto a ser criado
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(TaskRequest $request)
+    public function store(projectRequest $request)
     {
         // Iniciar a transação
         DB::beginTransaction();
@@ -63,12 +63,12 @@ class TaskController extends Controller
         try {
 
             // Cadastrar Projeto no banco de dados
-            $task = Task::create([
+            $project = Project::create([
                 'user_id' => $request->user_id,
-                'project_id' => $request->project_id,
-                'title' => $request->title,
+                'name' => $request->name,
                 'description' => $request->description,
-                'priority' => $request->priority,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
                 'status' => $request->status,
             ]);
 
@@ -76,8 +76,8 @@ class TaskController extends Controller
             DB::commit();
             return response()->json([
                 'status' => true,
-                'task' => $task,
-                'message' => 'Tarefa cadastrado com sucesso',
+                'project' => $project,
+                'message' => 'Projeto cadastrado com sucesso',
             ], 201);
         } catch (Exception $e) {
             // Operação não é concluída
@@ -85,19 +85,19 @@ class TaskController extends Controller
             //Retorna mensagem de erro
             return response()->json([
                 'status' => false,
-                'message' => 'Tarefa não cadastrado'
+                'message' => 'Projeto não cadastrado'
             ], 400);
         }
     }
 
     /**
-     * Atualizar os dados de um Tarefa existente com dados da requisição
+     * Atualizar os dados de um Projeto existente com dados da requisição
      * 
-     * @param \App\Http\Requests\TaskRequest $request contendo os dados da tarefa a ser atualizada
-     * @param \App\Models\Task $task tarefa a ser atualizada
+     * @param \App\Http\Requests\ProjectRequest $request contendo os dados do Projeto a ser atualizado
+     * @param \App\Models\Project $project Projeto a ser atualizado
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(TaskRequest $request, Task $task): JsonResponse
+    public function update(ProjectRequest $request, Project $project): JsonResponse
     {
 
         // Iniciar Transação
@@ -106,12 +106,12 @@ class TaskController extends Controller
         try {
 
             // Editar o registro no banco de dados
-            $task->update([
+            $project->update([
                 'user_id' => $request->user_id,
-                'project_id' => $request->project_id,
-                'title' => $request->title,
+                'name' => $request->name,
                 'description' => $request->description,
-                'priority' => $request->priority,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
                 'status' => $request->status,
             ]);
 
@@ -119,8 +119,8 @@ class TaskController extends Controller
             DB::commit();
             return response()->json([
                 'status' => true,
-                'task' => $task,
-                'message' => 'Tarefa atualizada com sucesso',
+                'project' => $project,
+                'message' => 'Projeto atualizado com sucesso',
             ], 200);
         } catch (Exception $e) {
             // Operação não é concluída
@@ -128,35 +128,35 @@ class TaskController extends Controller
             //Retorna mensagem de erro
             return response()->json([
                 'status' => false,
-                'message' => 'Tarefa não atualizada'
+                'message' => 'Projeto não atualizado'
             ], 400);
         }
     }
 
     /**
-     * Excluir tarefa no banco de dados
+     * Excluir Projeto no banco de dados
      * 
-     * @param \App\Models\Task $task tarefa a ser excluído
+     * @param \App\Models\Project $project Projeto a ser excluído
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Task $task) : JsonResponse {
+    public function destroy(Project $project) : JsonResponse {
         try {
 
             // Apagar o registro no banco de dados
-            $task->delete();
+            $project->delete();
 
-            // Retorna os dados da Tarefa apagada
+            // Retorna os dados do Projeto apagado
             return response()->json([
                 'status' => true,
-                'task' => $task,
-                'message' => 'Tarefa deletada com sucesso'
+                'project' => $project,
+                'message' => 'Projeto deletado com sucesso'
             ], 200);
 
         } catch (Exception $e) {
             //Retorna mensagem de erro
             return response()->json([
                 'status' => false,
-                'message' => 'Tarefa não deletada'
+                'message' => 'Projeto não deletado'
             ], 400);
         }
     }

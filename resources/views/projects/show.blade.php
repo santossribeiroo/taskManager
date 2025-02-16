@@ -41,6 +41,64 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-5">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title"> Membros do time </h5>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#addMemberModal"> <i class="bi bi-plus-circle"></i> </button>
+                        </div>
+
+                        <div class="row">
+                            @foreach ($teamMembers as $user)
+                                <div class="col-12">
+                                    <div class="card mb-3">
+                                        <div class="row g-0">
+                                            <div class="col-md-12">
+                                                <div class="card-body">
+                                                    <p class="card-title fw-bolder">{{ $user->name }}</p>
+                                                    <p class="card-text">{{ $user->email }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addMemberModal" tabindex="-1" aria-labelledby="addMemberModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addMemberModalLabel">Adicionar membros</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('projects.addMember')}}" method="POST">
+                        @csrf
+                        <input type="hidden" name="project_id" value="{{ $project->id }}">
+                        <div class="mb-3">
+                            <label for="user_id" class="form-label">Selecionar usuário</label>
+                            <select class="form-select" name="user_id" id="">
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary">Adicionar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
