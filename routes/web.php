@@ -23,7 +23,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('user', UserController::class);
     
-    Route::get('/dashboard', function () {
+    Route::get('/', function () {
         $user = Auth::user();
         $tasksCount = $user->tasks()->count();
         $recentTasks = $user->tasks()->latest()->take(5)->get();

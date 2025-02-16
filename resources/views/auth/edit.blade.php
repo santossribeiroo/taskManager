@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Configurações
+    Informações do usuário
 @endsection
 @section('content')
     <div class="container">
